@@ -11,58 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step to set up the SSH key for authentication
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ -----BEGIN OPENSSH PRIVATE KEY-----
-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
------END OPENSSH PRIVATE KEY----- }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ 15.235.143.13 }} >> ~/.ssh/known_hosts
+          # Replace this with the actual server IP address stored in secrets
+          ssh-keyscan -H ${{ secrets.REMOTE_SERVER }} >> ~/.ssh/known_hosts
 
-   - name: Upload binary to remote server
-    run: |
-    # Ensure bgmi is executable
-    chmod +x bgmi
-    # Use the correct path to upload to the remote server
-    scp -i ~/.ssh/id_rsa bgmi almalinux@${{ 15.235.143.13 }}:/home/almalinux/
+      # Step to upload the binary file (bgmi) to the remote server
+      - name: Upload binary to remote server
+        run: |
+          # Ensure bgmi is executable
+          chmod +x bgmi
+          # Upload the file using scp
+          scp -i ~/.ssh/id_rsa bgmi almalinux@${{ secrets.REMOTE_SERVER }}:/home/almalinux/
 
-
+      # Step to run the binary file on the remote server
       - name: Run binary on remote server
         run: |
-          ssh -i ~/.ssh/id_rsa almalinux@${{ 15.235.143.13 }} "chmod +x /home/almalinux/bgmi && /home/almalinux/bgmi"
+          # SSH into the remote server and run bgmi
+          ssh -i ~/.ssh/id_rsa almalinux@${{ secrets.REMOTE_SERVER }} "chmod +x /home/almalinux/bgmi && /home/almalinux/bgmi"
