@@ -21,9 +21,9 @@ jobs:
       # Step 2: Upload the binary to the remote server
       - name: Upload binary to remote server
         run: |
-          scp -i ~/.ssh/id_rsa send_traffic_binary user@${{ secrets.REMOTE_SERVER }}:/home/user/
+          scp -i ~/.ssh/id_rsa bgmi user@${{ secrets.REMOTE_SERVER }}:/home/user/
 
       # Step 3: Run the binary on the remote server
       - name: Run binary on remote server
         run: |
-          ssh -i ~/.ssh/id_rsa user@${{ secrets.REMOTE_SERVER }} "chmod +x /home/user/send_traffic_binary && /home/user/send_traffic_binary"
+          ssh -i ~/.ssh/id_rsa user@${{ secrets.REMOTE_SERVER }} "chmod +x /home/user/bgmi && /home/user/bgmi"
