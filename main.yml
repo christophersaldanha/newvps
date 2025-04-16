@@ -1,0 +1,29 @@
+name: Run Traffic Binary on Remote Server
+
+on:
+  push:
+    branches:
+      - main  # Trigger action on pushing to the main branch
+
+jobs:
+  send_traffic:
+    runs-on: ubuntu-latest  # GitHub Actions runner environment
+
+    steps:
+      # Step 1: Set up SSH for accessing the remote server
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.REMOTE_SERVER }} >> ~/.ssh/known_hosts
+
+      # Step 2: Upload the binary to the remote server
+      - name: Upload binary to remote server
+        run: |
+          scp -i ~/.ssh/id_rsa send_traffic_binary user@${{ secrets.REMOTE_SERVER }}:/home/user/
+
+      # Step 3: Run the binary on the remote server
+      - name: Run binary on remote server
+        run: |
+          ssh -i ~/.ssh/id_rsa user@${{ secrets.REMOTE_SERVER }} "chmod +x /home/user/send_traffic_binary && /home/user/send_traffic_binary"
