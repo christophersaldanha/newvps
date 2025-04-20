@@ -1,0 +1,4 @@
+  File "/workspaces/newvps/proxy-rotator.py", line 91
+    continue
+    ^^^^^^^^
+SyntaxError: 'continue' not properly in loop
